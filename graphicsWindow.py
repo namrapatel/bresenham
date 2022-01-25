@@ -14,7 +14,8 @@ class graphicsWindow:
         if 0 <= point[0] < self.__width and 0 <= point[1] < self.__height:
             self.__image[point[0],point[1]] = color
 
-    def drawLine(self,point1,point2,color): 
+    def drawLine(self,point1,point2,color):
+        return 1 + 1 
 
     def saveImage(self,fileName):
         self.__canvas.save(fileName)
