@@ -1,6 +1,6 @@
 # bresenham
 
-CS3388 assignment in which I implement Bresenham's line drawing algorithm and generate a circle of ellipses.
+CS3388 assignment in which I implement Bresenham's line drawing algorithm and generate a circle of circles.
 
 ## How to use
 ### Installation 
