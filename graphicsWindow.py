@@ -14,28 +14,61 @@ class graphicsWindow:
         if 0 <= point[0] < self.__width and 0 <= point[1] < self.__height:
             self.__image[point[0],point[1]] = color
 
+
+    """
+    Module Name: drawLine
+    Author: Namra Patel
+    Date: 28/01/2022
+    Purpose: Performs various checks to determine line slope and direction, then calls
+    the appropriate line drawing function that implements Bresenham's Integer Line Algorithm.
+
+    Parameters:
+        point1: The first point of the line.
+        point2: The second point of the line.
+        color: The color of the line.
+    """
     def drawLine(self,point1,point2,color):
+        # Get the values for x1 and x2 from the matrix.
         x1 = point1.get(0,0)
         x2 = point2.get(0,0)
 
+        # Get the values for y1 and y2 from the matrix.
         y1 = point1.get(1,0)
         y2 = point2.get(1,0)
         
-        if abs(y2-y1) < abs(x2-x1):
+        # Check if the line has a low slope, if so, use the drawLowSlope (for slopes between -1 and 1) function.
+        # Otherwise, use the drawSteepSlope (for slopes less than -1 or greater than 1) function. 
+        if abs(y2 - y1) < abs(x2 - x1):
+            # Reverse the points if the line is going left to right.
             if x1 > x2:
-                self.drawLow(x2,y2,x1,y1,color)
+                self.drawLowSlope(x2, y2, x1, y1, color)
             else:
-                self.drawLow(x1,y1,x2,y2,color)
+                self.drawLowSlope(x1, y1, x2, y2, color)
         else:
+            # Reverse the points if the line is going up to down.
             if y1 > y2:
-                self.drawHigh(x2,y2,x1,y1,color)
+                self.drawSteepSlope(x2, y2, x1, y1, color)
             else:
-                self.drawHigh(x1,y1,x2,y2,color)
+                self.drawSteepSlope(x1, y1, x2, y2, color)
 
-    def drawLow(self,x1,y1,x2,y2,color):
+
+    """
+    Module Name: drawLowSlope
+    Author: Namra Patel
+    Date: 28/01/2022
+    Purpose: Implementation of Bresenham's Integer Line Algorithm for lines with a slope between -1 and 1.
+
+    Parameters:
+        x1: The x-coordinate of the first point of the line.
+        y1: The y-coordinate of the first point of the line.
+        x2: The x-coordinate of the second point of the line.
+        y2: The y-coordinate of the second point of the line.
+        color: The color of the line.
+    """
+    def drawLowSlope(self, x1, y1, x2, y2, color):
         # Calculate the total change in x and y for the line.
-        dx = x2-x1
-        dy = y2-y1
+        dx = x2 - x1
+        dy = y2 - y1
         y_increment = 1 # Initialize the y step direction.
 
         # Check if y needs to increase or decrease, if decreasing, set y_increment and dy to negatives.
@@ -43,33 +76,61 @@ class graphicsWindow:
             y_increment = -1
             dy = -dy
 
+        # Calculate the initial error term (difference).
         difference = 2*dy - dx
-        y = y1
+        # Initialize y as y1 to begin.
+        y = y1 
 
-        for x in range(int(x1),int(x2)):
-            self.drawPoint((x,y),color)
+        # Loop through all points between x1 and x2.
+        for x in range(int(x1), int(x2)):
+            self.drawPoint((x, y), color) # Draw the point.
+
+            # If the error term is greater than, increment y in the predetermined direction,
+            # and adjust the error term.
             if difference > 0:
                 y = y + y_increment
-                difference = difference + 2*(dy-dx)
+                difference = difference + 2*(dy - dx)
             else:
                 difference = difference + 2*dy
 
-    def drawHigh(self,x1,y1,x2,y2,color):
-        dx = x2-x1
-        dy = y2-y1
-        x_increment = 1
+    """
+    Module Name: drawSteepSlope
+    Author: Namra Patel
+    Date: 28/01/2022
+    Purpose: Implementation of Bresenham's Integer Line Algorithm for lines with a slope between less than -1 or greater than 1.
+
+    Parameters:
+        x1: The x-coordinate of the first point of the line.
+        y1: The y-coordinate of the first point of the line.
+        x2: The x-coordinate of the second point of the line.
+        y2: The y-coordinate of the second point of the line.
+        color: The color of the line.
+    """
+    def drawSteepSlope(self, x1, y1, x2, y2, color):
+        # Calculate the total change in x and y for the line.
+        dx = x2 - x1
+        dy = y2 - y1
+        x_increment = 1 # Initialize the x step direction.
+
+        # Check if x needs to increase or decrease, if decreasing, set x_increment and dx to negatives.
         if dx < 0:
             x_increment = -1
             dx = -dx
 
+        # Calculate the initial error term (difference).
         difference = 2*dx - dy
+        # Initialize x as x1 to begin.
         x = x1
 
-        for y in range(int(y1),int(y2)):
-            self.drawPoint((x,y),color)
+        # Loop through all points between y1 and y2.
+        for y in range(int(y1), int(y2)):
+            self.drawPoint((x, y), color) # Draw the point.
+
+            # If the error term is greater than, increment y in the predetermined direction,
+            # and adjust the error term.
             if difference > 0:
                 x = x + x_increment
-                difference = difference + 2*(dx-dy)
+                difference = difference + 2*(dx - dy)
             else:
                 difference = difference + 2*dx
 
