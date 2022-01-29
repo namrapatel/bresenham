@@ -1,6 +1,7 @@
 # bresenham
 
-CS3388 assignment in which I implement Bresenham's line drawing algorithm and generate a circle of circles.
+Uses Bresenham's Integer Line Drawing algorithm to draw lines with varying slopes between
+a map of points. The end result is a circle of circles.
 
 ## How to use
 ### Installation 

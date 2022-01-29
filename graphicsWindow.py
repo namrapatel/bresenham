@@ -40,13 +40,13 @@ class graphicsWindow:
         # Check if the line has a low slope, if so, use the drawLowSlope (for slopes between -1 and 1) function.
         # Otherwise, use the drawSteepSlope (for slopes less than -1 or greater than 1) function. 
         if abs(y2 - y1) < abs(x2 - x1):
-            # Reverse the points if the line is going left to right.
+            # Reverse the points if the line is going left to right (when x1 > x2).
             if x1 > x2:
                 self.drawLowSlope(x2, y2, x1, y1, color)
             else:
                 self.drawLowSlope(x1, y1, x2, y2, color)
         else:
-            # Reverse the points if the line is going up to down.
+            # Reverse the points if the line is going up to down (when y1 > y2).
             if y1 > y2:
                 self.drawSteepSlope(x2, y2, x1, y1, color)
             else:
@@ -80,10 +80,11 @@ class graphicsWindow:
 
         # Calculate the initial error term (difference).
         difference = 2*dy - dx
-        # Initialize y as y1 to begin.
+        # Initialize y (used to draw point) as y1 to begin.
         y = y1 
 
         # Loop through all points between x1 and x2.
+        # Cast coords to int because they are originally floats.
         for x in range(int(x1), int(x2)):
             self.drawPoint((x, y), color) # Draw the point.
 
@@ -122,10 +123,11 @@ class graphicsWindow:
 
         # Calculate the initial error term (difference).
         difference = 2*dx - dy
-        # Initialize x as x1 to begin.
+        # Initialize x (used to draw point) as x1 to begin.
         x = x1
 
         # Loop through all points between y1 and y2.
+        # Cast coords to int because they are originally floats.
         for y in range(int(y1), int(y2)):
             self.drawPoint((x, y), color) # Draw the point.
 
