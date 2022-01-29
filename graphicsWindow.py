@@ -23,6 +23,7 @@ class graphicsWindow:
     the appropriate line drawing function that implements Bresenham's Integer Line Algorithm.
 
     Parameters:
+        self: The graphicsWindow object.
         point1: The first point of the line.
         point2: The second point of the line.
         color: The color of the line.
@@ -59,6 +60,7 @@ class graphicsWindow:
     Purpose: Implementation of Bresenham's Integer Line Algorithm for lines with a slope between -1 and 1.
 
     Parameters:
+        self: The graphicsWindow object.
         x1: The x-coordinate of the first point of the line.
         y1: The y-coordinate of the first point of the line.
         x2: The x-coordinate of the second point of the line.
@@ -100,6 +102,7 @@ class graphicsWindow:
     Purpose: Implementation of Bresenham's Integer Line Algorithm for lines with a slope between less than -1 or greater than 1.
 
     Parameters:
+        self: The graphicsWindow object.
         x1: The x-coordinate of the first point of the line.
         y1: The y-coordinate of the first point of the line.
         x2: The x-coordinate of the second point of the line.
