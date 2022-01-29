@@ -33,42 +33,45 @@ class graphicsWindow:
                 self.drawHigh(x1,y1,x2,y2,color)
 
     def drawLow(self,x1,y1,x2,y2,color):
+        # Calculate the total change in x and y for the line.
         dx = x2-x1
         dy = y2-y1
-        yi = 1
+        y_increment = 1 # Initialize the y step direction.
+
+        # Check if y needs to increase or decrease, if decreasing, set y_increment and dy to negatives.
         if dy < 0:
-            yi = -1
+            y_increment = -1
             dy = -dy
 
-        D = 2*dy - dx
+        difference = 2*dy - dx
         y = y1
-        
+
         for x in range(int(x1),int(x2)):
             self.drawPoint((x,y),color)
-            if D > 0:
-                y = y + yi
-                D = D + 2*(dy-dx)
+            if difference > 0:
+                y = y + y_increment
+                difference = difference + 2*(dy-dx)
             else:
-                D = D + 2*dy
+                difference = difference + 2*dy
 
     def drawHigh(self,x1,y1,x2,y2,color):
         dx = x2-x1
         dy = y2-y1
-        xi = 1
+        x_increment = 1
         if dx < 0:
-            xi = -1
+            x_increment = -1
             dx = -dx
 
-        D = 2*dx - dy
+        difference = 2*dx - dy
         x = x1
 
         for y in range(int(y1),int(y2)):
             self.drawPoint((x,y),color)
-            if D > 0:
-                x = x + xi
-                D = D + 2*(dx-dy)
+            if difference > 0:
+                x = x + x_increment
+                difference = difference + 2*(dx-dy)
             else:
-                D = D + 2*dx
+                difference = difference + 2*dx
 
     def saveImage(self,fileName):
         self.__canvas.save(fileName)
